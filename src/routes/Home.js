@@ -33,6 +33,7 @@ function Home() {
               synopsis={movie.synopsis}
               genres={movie.genres}
               year={movie.year}
+              backImg={movie.background_image_original}
             />
           ))}
         </div>

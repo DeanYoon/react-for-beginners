@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-function Movie({ id, title, year, synopsis, coverImg, genres }) {
+function Movie({ id, title, year, synopsis, coverImg, genres, backImg }) {
   return (
     <div>
       <h1>
@@ -10,6 +10,7 @@ function Movie({ id, title, year, synopsis, coverImg, genres }) {
       </h1>
       <div>{synopsis}</div>
       <img src={coverImg} />
+      <img src={backImg} />
       <ul>
         {genres?.map((g) => (
           <li key={g}>{g}</li>

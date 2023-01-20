@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Movie from "../components/Movie";
 
 function Detail() {
+  const [loading, setLoading] = useState(true);
   const [movie, setMovie] = useState({});
   const { id } = useParams();
   const getMovie = async () => {
@@ -11,6 +12,7 @@ function Detail() {
     ).json();
     setMovie(json.data.movie);
     console.log(json);
+    setLoading(false);
   };
   useEffect(() => {
     getMovie();
@@ -18,9 +20,8 @@ function Detail() {
 
   return (
     <div>
-      <h1>
-        {movie.title} : {movie.year}
-      </h1>
+      <h1>{loading ? "Loading.." : movie.title + "(" + movie.year + ")"}</h1>
+
       <img src={movie.medium_cover_image} />
       <h3>{movie.description_full}</h3>
       <ul>
@@ -28,6 +29,7 @@ function Detail() {
           <li key={g}>{g}</li>
         ))}
       </ul>
+      <Link to="/">Back</Link>
     </div>
   );
 }
