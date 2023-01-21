@@ -1,0 +1,22 @@
+.movie {
+  margin-right: 10px;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.movie__img,
+.movie__info {
+  width: 260px;
+  height: 380px;
+  border-radius: 15px;
+}
+
+.movie__info {
+  padding: 10px;
+  box-sizing: border-box;
+  background-color: rgba(0, 0, 0, 0.453);
+  display: none;
+  position: absolute;
+  color: white;
+  top: 0;
+}

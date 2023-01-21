@@ -1,21 +1,44 @@
 import PropTypes from "prop-types";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-function Movie({ id, title, year, synopsis, coverImg, genres, backImg }) {
+import styles from "./Movie.module.css";
+function Movie({ id, title, year, synopsis, coverImg, genres }) {
+  const [movie, setMovie] = useState({});
+  const [movieImg, setMovieImg] = useState({});
+  const showMovieInfo = (event) => {
+    setMovieImg(event.target);
+    const parsed = event.target.parentElement.parentElement;
+    const movieInfo = parsed.querySelector("div");
+    setMovie(movieInfo);
+    movieInfo.style.display = "block";
+    console.log(event.target);
+  };
+  const unshowMovieInfo = (event) => {
+    movie.style.display = "none";
+  };
   return (
-    <div>
-      <h1>
-        <Link to={`/movie/${id}`}>
-          {title} : {year}
-        </Link>
-      </h1>
-      <div>{synopsis}</div>
-      <img src={coverImg} />
-      <img src={backImg} />
-      <ul>
-        {genres?.map((g) => (
-          <li key={g}>{g}</li>
-        ))}
-      </ul>
+    <div className={styles.movie}>
+      <Link to={`/movie/${id}`}>
+        <img
+          src={coverImg}
+          onMouseOver={showMovieInfo}
+          className={styles.movie__img}
+        />
+        <div className={styles.movie__info} onMouseLeave={unshowMovieInfo}>
+          <h3>
+            {title} : {year}
+          </h3>
+          <div>
+            {synopsis.length < 237 ? synopsis : `${synopsis.slice(0, 237)},,,`}
+          </div>
+
+          <ul>
+            {genres?.map((g) => (
+              <li key={g}>{g}</li>
+            ))}
+          </ul>
+        </div>
+      </Link>
     </div>
   );
 }

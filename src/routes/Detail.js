@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import Movie from "../components/Movie";
-
+import styles from "./Detail.module.css";
 function Detail() {
   const [loading, setLoading] = useState(true);
   const [movie, setMovie] = useState({});
