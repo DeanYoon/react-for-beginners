@@ -11,25 +11,37 @@ function Detail() {
       await fetch(`https://yts.mx/api/v2/movie_details.json?movie_id=${id}`)
     ).json();
     setMovie(json.data.movie);
-    console.log(json);
     setLoading(false);
   };
   useEffect(() => {
     getMovie();
   }, []);
 
-  return (
-    <div>
-      <h1>{loading ? "Loading.." : movie.title + "(" + movie.year + ")"}</h1>
+  return loading ? null : (
+    <div
+      className={styles.background}
+      style={{
+        background: `  url(${movie.background_image}) 0% 0% / cover no-repeat `,
+      }}
+    >
+      <div className={styles.movie__detail}>
+        <img src={movie.medium_cover_image} />
+        <div className={styles.movie__detail__info}>
+          <h1 className={styles.movie__detail__info__title}>
+            {loading ? "Loading.." : movie.title + "(" + movie.year + ")"}
+          </h1>
 
-      <img src={movie.medium_cover_image} />
-      <h3>{movie.description_full}</h3>
-      <ul>
-        {movie.genres?.map((g) => (
-          <li key={g}>{g}</li>
-        ))}
-      </ul>
-      <Link to="/">Back</Link>
+          <h3>{movie.description_full}</h3>
+          <ul>
+            {movie.genres?.map((g) => (
+              <li key={g}>{g}</li>
+            ))}
+          </ul>
+          <Link to="/">
+            <span className={styles.backBtn}>Back</span>
+          </Link>
+        </div>
+      </div>
     </div>
   );
 }

@@ -4,9 +4,8 @@ import { Link } from "react-router-dom";
 import styles from "./Movie.module.css";
 function Movie({ id, title, year, synopsis, coverImg, genres }) {
   const [movie, setMovie] = useState({});
-  const [movieImg, setMovieImg] = useState({});
+
   const showMovieInfo = (event) => {
-    setMovieImg(event.target);
     const parsed = event.target.parentElement.parentElement;
     const movieInfo = parsed.querySelector("div");
     setMovie(movieInfo);
