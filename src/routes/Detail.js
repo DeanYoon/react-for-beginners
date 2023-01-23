@@ -5,6 +5,7 @@ import styles from "./Detail.module.css";
 function Detail() {
   const [loading, setLoading] = useState(true);
   const [movie, setMovie] = useState({});
+  const [windowSize, setWindowSize] = useState();
   const { id } = useParams();
   const getMovie = async () => {
     const json = await (
@@ -13,19 +14,44 @@ function Detail() {
     setMovie(json.data.movie);
     setLoading(false);
   };
+  const getWindowSize = () => {
+    setWindowSize(window.innerWidth);
+  };
+  const handleResize = () => {
+    setWindowSize(window.innerWidth);
+  };
   useEffect(() => {
     getMovie();
+    getWindowSize();
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
 
   return loading ? null : (
     <div
       className={styles.background}
-      style={{
-        background: `  url(${movie.background_image}) 0% 0% / cover no-repeat `,
-      }}
+      style={
+        windowSize < 900
+          ? {
+              background: `  url(${movie.background_image}) 0% 0% / cover`,
+            }
+          : {
+              background: `  url(${movie.background_image}) 0% 0% / cover no-repeat `,
+              height: "100vh",
+            }
+      }
     >
-      <div className={styles.movie__detail}>
-        <img src={movie.medium_cover_image} />
+      <div
+        className={styles.movie__detail}
+        style={
+          windowSize < 900
+            ? { flexDirection: "column" }
+            : { flexDirection: "row" }
+        }
+      >
+        <img src={movie.medium_cover_image} className={styles.img} />
         <div className={styles.movie__detail__info}>
           <h1 className={styles.movie__detail__info__title}>
             {loading ? "Loading.." : movie.title + "(" + movie.year + ")"}

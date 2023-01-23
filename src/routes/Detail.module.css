@@ -1,6 +1,5 @@
 .background {
   color: white;
-  height: 100vh;
   padding: 20px;
 }
 
@@ -8,16 +7,22 @@
   display: flex;
   height: 100%;
   align-items: center;
-  margin-left: 50px;
 }
 
-img {
+.img {
   width: 230px;
   height: 345px;
   margin-right: 20px;
+  margin: 100px 0;
+  padding: 20px;
+}
+.movie__detail__info {
+  display: flex;
+  flex-direction: column;
 }
 .movie__detail__info__title {
   margin: 0;
+  text-align: center;
 }
 
 .backBtn {

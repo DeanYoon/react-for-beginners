@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "./Movie.module.css";
-function Movie({ id, title, year, synopsis, coverImg, genres }) {
+function Movie({ id, title, year, synopsis, coverImg, genres, rating }) {
   const [movie, setMovie] = useState({});
 
   const showMovieInfo = (event) => {
@@ -10,7 +10,6 @@ function Movie({ id, title, year, synopsis, coverImg, genres }) {
     const movieInfo = parsed.querySelector("div");
     setMovie(movieInfo);
     movieInfo.style.display = "block";
-    console.log(event.target);
   };
   const unshowMovieInfo = (event) => {
     movie.style.display = "none";
@@ -36,6 +35,7 @@ function Movie({ id, title, year, synopsis, coverImg, genres }) {
               <li key={g}>{g}</li>
             ))}
           </ul>
+          <div>Rating : {rating ? rating : "No data"}</div>
         </div>
       </Link>
     </div>
