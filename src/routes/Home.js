@@ -8,6 +8,11 @@ function Home() {
   const [rating, setRating] = useState(0);
   const [popular, setPopular] = useState("");
   const [year, setYear] = useState("desc");
+  const [windowSize, setWindowSize] = useState();
+  const handleResize = (event) => {
+    setWindowSize(window.innerWidth);
+  };
+
   const getMovies = async () => {
     const json = await (
       await fetch(
@@ -34,6 +39,11 @@ function Home() {
   };
   useEffect(() => {
     getMovies();
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
 
   useEffect(() => {
@@ -41,45 +51,61 @@ function Home() {
   }, [genre, rating, popular, year]);
   return (
     <div>
-      <div className="header">
-        <select onChange={onChangeGenre}>
-          <option>--Choose Genre--</option>
-          <option id="comedy" value="comedy">
-            comedy
-          </option>
-          <option id="horror">horror</option>
-          <option id="romance">romance</option>
-          <option id="action">action</option>
-          <option id="thriller">thriller</option>
-          <option id="drama">drama</option>
-          <option id="animation">animation</option>
-          <option id="superhero">superhero</option>
-          <option id="fantasy">fantasy</option>
-          <option id="mystery">mystery</option>
-        </select>
-        <select onChange={onChangeRating}>
-          <option>--Choose Rating--</option>
-          <option>0</option>
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-          <option>6</option>
-          <option>7</option>
-          <option>8</option>
-          <option>9</option>
-        </select>
-        <select onChange={onChangePopular}>
-          <option>--Sort by popularity--</option>
-          <option>True</option>
-          <option>False</option>
-        </select>
-        <select onChange={onChangeYear}>
-          <option>--Sort by year--</option>
-          <option>True</option>
-          <option>False</option>
-        </select>
+      <div className={styles.header}>
+        <span
+          style={
+            windowSize < 800
+              ? { flexDirection: "column" }
+              : { flexDirection: "row" }
+          }
+        >
+          <select className={styles.header__select} onChange={onChangeGenre}>
+            <option>--Choose Genre--</option>
+            <option id="comedy" value="comedy">
+              comedy
+            </option>
+            <option id="horror">horror</option>
+            <option id="romance">romance</option>
+            <option id="action">action</option>
+            <option id="thriller">thriller</option>
+            <option id="drama">drama</option>
+            <option id="animation">animation</option>
+            <option id="superhero">superhero</option>
+            <option id="fantasy">fantasy</option>
+            <option id="mystery">mystery</option>
+          </select>
+          <select className={styles.header__select} onChange={onChangeRating}>
+            <option>--Choose Rating--</option>
+            <option>0</option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+            <option>7</option>
+            <option>8</option>
+            <option>9</option>
+          </select>
+        </span>
+        <span
+          style={
+            windowSize < 800
+              ? { flexDirection: "column" }
+              : { flexDirection: "row" }
+          }
+        >
+          <select className={styles.header__select} onChange={onChangePopular}>
+            <option>--Sort by popularity--</option>
+            <option>True</option>
+            <option>False</option>
+          </select>
+          <select className={styles.header__select} onChange={onChangeYear}>
+            <option>--Sort by year--</option>
+            <option>True</option>
+            <option>False</option>
+          </select>
+        </span>
       </div>
       {loading ? (
         <h1>Loading...</h1>

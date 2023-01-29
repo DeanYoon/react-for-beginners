@@ -1,8 +1,24 @@
 html,
 body {
-  padding: 0;
+  padding: 0px;
   margin: 0;
   height: 100vh;
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  width: 100vw;
+}
+.header span {
+  display: flex;
+  flex-direction: column;
+}
+.header__select {
+  margin: 0 10px;
+  border: 2px solid black;
+  margin: 10px;
 }
 
 .movies {

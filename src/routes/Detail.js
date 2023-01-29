@@ -14,15 +14,13 @@ function Detail() {
     setMovie(json.data.movie);
     setLoading(false);
   };
-  const getWindowSize = () => {
-    setWindowSize(window.innerWidth);
-  };
+
   const handleResize = () => {
     setWindowSize(window.innerWidth);
   };
   useEffect(() => {
     getMovie();
-    getWindowSize();
+    handleResize();
     window.addEventListener("resize", handleResize);
     return () => {
       window.removeEventListener("resize", handleResize);
