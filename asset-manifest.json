@@ -1,13 +1,10 @@
 {
   "files": {
-    "main.css": "/react-for-beginners/static/css/main.b4749ad7.css",
-    "main.js": "/react-for-beginners/static/js/main.86602ca1.js",
-    "index.html": "/react-for-beginners/index.html",
-    "main.b4749ad7.css.map": "/react-for-beginners/static/css/main.b4749ad7.css.map",
-    "main.86602ca1.js.map": "/react-for-beginners/static/js/main.86602ca1.js.map"
+    "main.js": "/coin-chart/static/js/main.51ce03f8.js",
+    "index.html": "/coin-chart/index.html",
+    "main.51ce03f8.js.map": "/coin-chart/static/js/main.51ce03f8.js.map"
   },
   "entrypoints": [
-    "static/css/main.b4749ad7.css",
-    "static/js/main.86602ca1.js"
+    "static/js/main.51ce03f8.js"
   ]
 }
